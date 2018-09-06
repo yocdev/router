@@ -101,13 +101,16 @@ class LocationProvider extends React.Component {
       props: { history }
     } = this;
     refs.unlisten = history.listen(() => {
-      Promise.resolve().then(() => {
-        unstable_deferredUpdates(() => {
-          if (!this.unmounted) {
-            this.setState(() => ({ context: this.getContext() }));
-          }
-        });
-      });
+      if (!this.unmounted) {
+        this.setState(() => ({ context: this.getContext() }));
+      }
+      // Promise.resolve().then(() => {
+      //   unstable_deferredUpdates(() => {
+      //     if (!this.unmounted) {
+      //       this.setState(() => ({ context: this.getContext() }));
+      //     }
+      //   });
+      // });
     });
   }
 
