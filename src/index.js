@@ -96,6 +96,10 @@ class LocationProvider extends React.Component {
   }
 
   componentDidMount() {
+    const div = document.createElement("div");
+    div.innerHTML = `LocationProvider --开始`;
+    const test = document.getElementById("test");
+    test.appendChild(div);
     let {
       state: { refs },
       props: { history }
@@ -112,6 +116,7 @@ class LocationProvider extends React.Component {
       //   });
       // });
     });
+    div.innerHTML = `LocationProvider --结束`;
   }
 
   componentWillUnmount() {
@@ -155,22 +160,40 @@ let BaseContext = createNamedContext("Base", { baseuri: "/", basepath: "/" });
 
 ////////////////////////////////////////////////////////////////////////////////
 // The main event, welcome to the show everybody.
-let Router = props => (
-  <BaseContext.Consumer>
-    {baseContext => (
-      <Location>
-        {locationContext => (
-          <RouterImpl {...baseContext} {...locationContext} {...props} />
-        )}
-      </Location>
-    )}
-  </BaseContext.Consumer>
-);
+let Router = props => {
+  const div = document.createElement("div");
+  const test = document.getElementById("test");
+  div.innerHTML = `Router --开始`;
+  test.appendChild(div);
+
+  return (
+    <BaseContext.Consumer>
+      {baseContext => {
+        test.innerHTML += "进入--baseContext";
+        return (
+          <Location>
+            {locationContext => {
+              test.innerHTML += "进入--locationContext";
+              return (
+                <RouterImpl {...baseContext} {...locationContext} {...props} />
+              );
+            }}
+          </Location>
+        );
+      }}
+    </BaseContext.Consumer>
+  );
+};
 
 class RouterImpl extends React.PureComponent {
   static defaultProps = {
     primary: true
   };
+
+  componentDidMount() {
+    const test = document.getElementById("test");
+    test.innerHTML += "RouterImpl 进入";
+  }
 
   render() {
     let {

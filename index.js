@@ -129,6 +129,10 @@ var LocationProvider = function (_React$Component) {
   LocationProvider.prototype.componentDidMount = function componentDidMount() {
     var _this2 = this;
 
+    var div = document.createElement('div');
+    div.innerHTML = "LocationProvider --\u5F00\u59CB";
+    var test = document.getElementById('test');
+    test.appendChild(div);
     var refs = this.state.refs,
         history = this.props.history;
 
@@ -146,6 +150,7 @@ var LocationProvider = function (_React$Component) {
       //   });
       // });
     });
+    div.innerHTML = "LocationProvider --\u7ED3\u675F";
   };
 
   LocationProvider.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -202,14 +207,21 @@ var BaseContext = createNamedContext("Base", { baseuri: "/", basepath: "/" });
 ////////////////////////////////////////////////////////////////////////////////
 // The main event, welcome to the show everybody.
 var Router = function Router(props) {
+  var div = document.createElement('div');
+  var test = document.getElementById('test');
+  div.innerHTML = "Router --\u5F00\u59CB";
+  test.appendChild(div);
+
   return _react2.default.createElement(
     BaseContext.Consumer,
     null,
     function (baseContext) {
+      test.innerHTML += '进入--baseContext';
       return _react2.default.createElement(
         Location,
         null,
         function (locationContext) {
+          test.innerHTML += '进入--locationContext';
           return _react2.default.createElement(RouterImpl, _extends({}, baseContext, locationContext, props));
         }
       );
@@ -225,6 +237,11 @@ var RouterImpl = function (_React$PureComponent) {
 
     return _possibleConstructorReturn(this, _React$PureComponent.apply(this, arguments));
   }
+
+  RouterImpl.prototype.componentDidMount = function componentDidMount() {
+    var test = document.getElementById('test');
+    test.innerHTML += ' 进入 RouterImpl ';
+  };
 
   RouterImpl.prototype.render = function render() {
     var _props = this.props,
