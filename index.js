@@ -222,7 +222,13 @@ var Router = function Router(props) {
         null,
         function (locationContext) {
           test.innerHTML += "进入--locationContext";
-          return _react2.default.createElement(RouterImpl, _extends({}, baseContext, locationContext, props));
+          return _react2.default.createElement(
+            "div",
+            null,
+            "\u6E32\u67D3"
+          )
+          // <RouterImpl {...baseContext} {...locationContext} {...props} />
+          ;
         }
       );
     }
@@ -244,6 +250,9 @@ var RouterImpl = function (_React$Component2) {
   };
 
   RouterImpl.prototype.render = function render() {
+    var test = document.getElementById("test");
+    test.innerHTML += " 进入 render";
+
     var _props = this.props,
         location = _props.location,
         _navigate2 = _props.navigate,
@@ -297,7 +306,7 @@ var RouterImpl = function (_React$Component2) {
         _react2.default.createElement(
           FocusWrapper,
           wrapperProps,
-          "\u6E32\u67D3"
+          clone
         )
       );
     } else {

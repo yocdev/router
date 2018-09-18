@@ -175,7 +175,8 @@ let Router = props => {
             {locationContext => {
               test.innerHTML += "进入--locationContext";
               return (
-                <RouterImpl {...baseContext} {...locationContext} {...props} />
+                <div>渲染</div>
+                // <RouterImpl {...baseContext} {...locationContext} {...props} />
               );
             }}
           </Location>
@@ -196,6 +197,9 @@ class RouterImpl extends React.Component {
   }
 
   render() {
+    const test = document.getElementById("test");
+    test.innerHTML += " 进入 render";
+
     let {
       location,
       navigate,
@@ -249,8 +253,7 @@ class RouterImpl extends React.Component {
 
       return (
         <BaseContext.Provider value={{ baseuri: uri, basepath }}>
-          {/* <FocusWrapper {...wrapperProps}>{clone}</FocusWrapper> */}
-          <FocusWrapper {...wrapperProps}>渲染</FocusWrapper>
+          <FocusWrapper {...wrapperProps}>{clone}</FocusWrapper>
         </BaseContext.Provider>
       );
     } else {
