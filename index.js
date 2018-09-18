@@ -129,9 +129,9 @@ var LocationProvider = function (_React$Component) {
   LocationProvider.prototype.componentDidMount = function componentDidMount() {
     var _this2 = this;
 
-    var div = document.createElement('div');
+    var div = document.createElement("div");
     div.innerHTML = "LocationProvider --\u5F00\u59CB";
-    var test = document.getElementById('test');
+    var test = document.getElementById("test");
     test.appendChild(div);
     var refs = this.state.refs,
         history = this.props.history;
@@ -207,8 +207,8 @@ var BaseContext = createNamedContext("Base", { baseuri: "/", basepath: "/" });
 ////////////////////////////////////////////////////////////////////////////////
 // The main event, welcome to the show everybody.
 var Router = function Router(props) {
-  var div = document.createElement('div');
-  var test = document.getElementById('test');
+  var div = document.createElement("div");
+  var test = document.getElementById("test");
   div.innerHTML = "Router --\u5F00\u59CB";
   test.appendChild(div);
 
@@ -216,12 +216,12 @@ var Router = function Router(props) {
     BaseContext.Consumer,
     null,
     function (baseContext) {
-      test.innerHTML += '进入--baseContext';
+      test.innerHTML += "进入--baseContext";
       return _react2.default.createElement(
         Location,
         null,
         function (locationContext) {
-          test.innerHTML += '进入--locationContext';
+          test.innerHTML += "进入--locationContext";
           return _react2.default.createElement(RouterImpl, _extends({}, baseContext, locationContext, props));
         }
       );
@@ -229,18 +229,18 @@ var Router = function Router(props) {
   );
 };
 
-var RouterImpl = function (_React$PureComponent) {
-  _inherits(RouterImpl, _React$PureComponent);
+var RouterImpl = function (_React$Component2) {
+  _inherits(RouterImpl, _React$Component2);
 
   function RouterImpl() {
     _classCallCheck(this, RouterImpl);
 
-    return _possibleConstructorReturn(this, _React$PureComponent.apply(this, arguments));
+    return _possibleConstructorReturn(this, _React$Component2.apply(this, arguments));
   }
 
   RouterImpl.prototype.componentDidMount = function componentDidMount() {
-    var test = document.getElementById('test');
-    test.innerHTML += ' 进入 RouterImpl ';
+    var test = document.getElementById("test");
+    test.innerHTML += " 进入 RouterImpl";
   };
 
   RouterImpl.prototype.render = function render() {
@@ -287,6 +287,7 @@ var RouterImpl = function (_React$PureComponent) {
 
       // using 'div' for < 16.3 support
       var FocusWrapper = primary ? FocusHandler : component;
+
       // don't pass any props to 'div'
       var wrapperProps = primary ? _extends({ uri: uri, location: location, component: component }, domProps) : domProps;
 
@@ -296,7 +297,7 @@ var RouterImpl = function (_React$PureComponent) {
         _react2.default.createElement(
           FocusWrapper,
           wrapperProps,
-          clone
+          "\u6E32\u67D3"
         )
       );
     } else {
@@ -318,7 +319,7 @@ var RouterImpl = function (_React$PureComponent) {
   };
 
   return RouterImpl;
-}(_react2.default.PureComponent);
+}(_react2.default.Component);
 
 RouterImpl.defaultProps = {
   primary: true
@@ -351,8 +352,8 @@ var FocusHandler = function FocusHandler(_ref3) {
 var initialRender = true;
 var focusHandlerCount = 0;
 
-var FocusHandlerImpl = function (_React$Component2) {
-  _inherits(FocusHandlerImpl, _React$Component2);
+var FocusHandlerImpl = function (_React$Component3) {
+  _inherits(FocusHandlerImpl, _React$Component3);
 
   function FocusHandlerImpl() {
     var _temp2, _this4, _ret2;
@@ -363,7 +364,7 @@ var FocusHandlerImpl = function (_React$Component2) {
       args[_key2] = arguments[_key2];
     }
 
-    return _ret2 = (_temp2 = (_this4 = _possibleConstructorReturn(this, _React$Component2.call.apply(_React$Component2, [this].concat(args))), _this4), _this4.state = {}, _this4.requestFocus = function (node) {
+    return _ret2 = (_temp2 = (_this4 = _possibleConstructorReturn(this, _React$Component3.call.apply(_React$Component3, [this].concat(args))), _this4), _this4.state = {}, _this4.requestFocus = function (node) {
       if (!_this4.state.shouldFocus) {
         node.focus();
       }
@@ -534,13 +535,13 @@ var redirectTo = function redirectTo(to) {
   throw new RedirectRequest(to);
 };
 
-var RedirectImpl = function (_React$Component3) {
-  _inherits(RedirectImpl, _React$Component3);
+var RedirectImpl = function (_React$Component4) {
+  _inherits(RedirectImpl, _React$Component4);
 
   function RedirectImpl() {
     _classCallCheck(this, RedirectImpl);
 
-    return _possibleConstructorReturn(this, _React$Component3.apply(this, arguments));
+    return _possibleConstructorReturn(this, _React$Component4.apply(this, arguments));
   }
 
   // Support React < 16 with this hook

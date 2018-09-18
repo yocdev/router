@@ -185,14 +185,14 @@ let Router = props => {
   );
 };
 
-class RouterImpl extends React.PureComponent {
+class RouterImpl extends React.Component {
   static defaultProps = {
     primary: true
   };
 
   componentDidMount() {
     const test = document.getElementById("test");
-    test.innerHTML += "RouterImpl 进入";
+    test.innerHTML += " 进入 RouterImpl";
   }
 
   render() {
@@ -241,6 +241,7 @@ class RouterImpl extends React.PureComponent {
 
       // using 'div' for < 16.3 support
       let FocusWrapper = primary ? FocusHandler : component;
+
       // don't pass any props to 'div'
       let wrapperProps = primary
         ? { uri, location, component, ...domProps }
@@ -248,7 +249,8 @@ class RouterImpl extends React.PureComponent {
 
       return (
         <BaseContext.Provider value={{ baseuri: uri, basepath }}>
-          <FocusWrapper {...wrapperProps}>{clone}</FocusWrapper>
+          {/* <FocusWrapper {...wrapperProps}>{clone}</FocusWrapper> */}
+          <FocusWrapper {...wrapperProps}>渲染</FocusWrapper>
         </BaseContext.Provider>
       );
     } else {
