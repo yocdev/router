@@ -161,22 +161,14 @@ let BaseContext = createNamedContext("Base", { baseuri: "/", basepath: "/" });
 ////////////////////////////////////////////////////////////////////////////////
 // The main event, welcome to the show everybody.
 let Router = props => {
-  const div = document.createElement("div");
-  const test = document.getElementById("test");
-  div.innerHTML = `Router --开始`;
-  test.appendChild(div);
-
   return (
     <BaseContext.Consumer>
       {baseContext => {
-        test.innerHTML += "进入--baseContext";
         return (
           <Location>
             {locationContext => {
-              test.innerHTML += "进入--locationContext";
               return (
-                <div>渲染</div>
-                // <RouterImpl {...baseContext} {...locationContext} {...props} />
+                <RouterImpl {...baseContext} {...locationContext} {...props} />
               );
             }}
           </Location>
@@ -250,6 +242,7 @@ class RouterImpl extends React.Component {
       let wrapperProps = primary
         ? { uri, location, component, ...domProps }
         : domProps;
+      test.innerHTML += " 进入 match";
 
       return (
         <BaseContext.Provider value={{ baseuri: uri, basepath }}>
@@ -277,19 +270,23 @@ class RouterImpl extends React.Component {
 
 let FocusContext = createNamedContext("Focus");
 
-let FocusHandler = ({ uri, location, component, ...domProps }) => (
-  <FocusContext.Consumer>
-    {requestFocus => (
-      <FocusHandlerImpl
-        {...domProps}
-        component={component}
-        requestFocus={requestFocus}
-        uri={uri}
-        location={location}
-      />
-    )}
-  </FocusContext.Consumer>
-);
+let FocusHandler = ({ uri, location, component, ...domProps }) => {
+  const test = document.getElementById("test");
+  test.innerHTML += " FocusHandler 不是 div ";
+  return (
+    <FocusContext.Consumer>
+      {requestFocus => (
+        <FocusHandlerImpl
+          {...domProps}
+          component={component}
+          requestFocus={requestFocus}
+          uri={uri}
+          location={location}
+        />
+      )}
+    </FocusContext.Consumer>
+  );
+};
 
 // don't focus on initial render
 let initialRender = true;
@@ -318,6 +315,8 @@ class FocusHandlerImpl extends React.Component {
   }
 
   componentDidMount() {
+    const test = document.getElementById("test");
+    test.innerHTML += "FocusHandlerImpl componentDidMount";
     focusHandlerCount++;
     this.focus();
   }
@@ -363,6 +362,8 @@ class FocusHandlerImpl extends React.Component {
   };
 
   render() {
+    const test = document.getElementById("test");
+    test.innerHTML += "FocusHandlerImpl render";
     let {
       children,
       style,

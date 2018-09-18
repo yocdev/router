@@ -207,28 +207,15 @@ var BaseContext = createNamedContext("Base", { baseuri: "/", basepath: "/" });
 ////////////////////////////////////////////////////////////////////////////////
 // The main event, welcome to the show everybody.
 var Router = function Router(props) {
-  var div = document.createElement("div");
-  var test = document.getElementById("test");
-  div.innerHTML = "Router --\u5F00\u59CB";
-  test.appendChild(div);
-
   return _react2.default.createElement(
     BaseContext.Consumer,
     null,
     function (baseContext) {
-      test.innerHTML += "进入--baseContext";
       return _react2.default.createElement(
         Location,
         null,
         function (locationContext) {
-          test.innerHTML += "进入--locationContext";
-          return _react2.default.createElement(
-            "div",
-            null,
-            "\u6E32\u67D3"
-          )
-          // <RouterImpl {...baseContext} {...locationContext} {...props} />
-          ;
+          return _react2.default.createElement(RouterImpl, _extends({}, baseContext, locationContext, props));
         }
       );
     }
@@ -299,6 +286,7 @@ var RouterImpl = function (_React$Component2) {
 
       // don't pass any props to 'div'
       var wrapperProps = primary ? _extends({ uri: uri, location: location, component: component }, domProps) : domProps;
+      test.innerHTML += " 进入 match";
 
       return _react2.default.createElement(
         BaseContext.Provider,
@@ -343,6 +331,8 @@ var FocusHandler = function FocusHandler(_ref3) {
       component = _ref3.component,
       domProps = _objectWithoutProperties(_ref3, ["uri", "location", "component"]);
 
+  var test = document.getElementById('test');
+  test.innerHTML += ' FocusHandler 不是 div ';
   return _react2.default.createElement(
     FocusContext.Consumer,
     null,
@@ -396,6 +386,8 @@ var FocusHandlerImpl = function (_React$Component3) {
   };
 
   FocusHandlerImpl.prototype.componentDidMount = function componentDidMount() {
+    var test = document.getElementById('test');
+    test.innerHTML += 'FocusHandlerImpl componentDidMount';
     focusHandlerCount++;
     this.focus();
   };
@@ -437,6 +429,9 @@ var FocusHandlerImpl = function (_React$Component3) {
 
   FocusHandlerImpl.prototype.render = function render() {
     var _this5 = this;
+
+    var test = document.getElementById('test');
+    test.innerHTML += 'FocusHandlerImpl render';
 
     var _props2 = this.props,
         children = _props2.children,
