@@ -205,7 +205,9 @@ class RouterImpl extends React.Component {
     let routes = React.Children.map(children, createRoute(basepath));
     let { pathname } = location;
 
+    test.innerHTML += " 进入 pick";
     let match = pick(routes, pathname);
+    test.innerHTML += " 过 pick";
 
     if (match) {
       let {
@@ -217,6 +219,7 @@ class RouterImpl extends React.Component {
 
       // remove the /* from the end for child routes relative paths
       basepath = route.default ? basepath : route.path.replace(/\*$/, "");
+      test.innerHTML += " 进入 props";
 
       let props = {
         ...params,
@@ -234,6 +237,7 @@ class RouterImpl extends React.Component {
           undefined
         )
       );
+      test.innerHTML += " 进入 clone";
 
       // using 'div' for < 16.3 support
       let FocusWrapper = primary ? FocusHandler : component;
@@ -272,7 +276,7 @@ let FocusContext = createNamedContext("Focus");
 
 let FocusHandler = ({ uri, location, component, ...domProps }) => {
   const test = document.getElementById("test");
-  test.innerHTML += " FocusHandler 不是 div ";
+  test.innerHTML += "--@ FocusHandler 不是 div ";
   return (
     <FocusContext.Consumer>
       {requestFocus => (

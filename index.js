@@ -255,7 +255,9 @@ var RouterImpl = function (_React$Component2) {
     var pathname = location.pathname;
 
 
+    test.innerHTML += " 进入 pick";
     var match = (0, _utils.pick)(routes, pathname);
+    test.innerHTML += " 过 pick";
 
     if (match) {
       var params = match.params,
@@ -266,6 +268,7 @@ var RouterImpl = function (_React$Component2) {
       // remove the /* from the end for child routes relative paths
 
       basepath = route.default ? basepath : route.path.replace(/\*$/, "");
+      test.innerHTML += " 进入 props";
 
       var props = _extends({}, params, {
         uri: uri,
@@ -280,6 +283,7 @@ var RouterImpl = function (_React$Component2) {
         { primary: primary },
         element.props.children
       ) : undefined);
+      test.innerHTML += " 进入 clone";
 
       // using 'div' for < 16.3 support
       var FocusWrapper = primary ? FocusHandler : component;
@@ -331,8 +335,8 @@ var FocusHandler = function FocusHandler(_ref3) {
       component = _ref3.component,
       domProps = _objectWithoutProperties(_ref3, ["uri", "location", "component"]);
 
-  var test = document.getElementById('test');
-  test.innerHTML += ' FocusHandler 不是 div ';
+  var test = document.getElementById("test");
+  test.innerHTML += "--@ FocusHandler 不是 div ";
   return _react2.default.createElement(
     FocusContext.Consumer,
     null,
@@ -386,8 +390,8 @@ var FocusHandlerImpl = function (_React$Component3) {
   };
 
   FocusHandlerImpl.prototype.componentDidMount = function componentDidMount() {
-    var test = document.getElementById('test');
-    test.innerHTML += 'FocusHandlerImpl componentDidMount';
+    var test = document.getElementById("test");
+    test.innerHTML += "FocusHandlerImpl componentDidMount";
     focusHandlerCount++;
     this.focus();
   };
@@ -430,8 +434,8 @@ var FocusHandlerImpl = function (_React$Component3) {
   FocusHandlerImpl.prototype.render = function render() {
     var _this5 = this;
 
-    var test = document.getElementById('test');
-    test.innerHTML += 'FocusHandlerImpl render';
+    var test = document.getElementById("test");
+    test.innerHTML += "FocusHandlerImpl render";
 
     var _props2 = this.props,
         children = _props2.children,
