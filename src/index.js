@@ -206,7 +206,12 @@ class RouterImpl extends React.Component {
     let { pathname } = location;
 
     test.innerHTML += " 进入 pick";
-    let match = pick(routes, pathname);
+    let match;
+    try {
+      match = pick(routes, pathname);
+    } catch (err) {
+      test.innerHTML += JSON.stringify(err);
+    }
     test.innerHTML += " 过 pick";
 
     if (match) {
@@ -275,8 +280,6 @@ class RouterImpl extends React.Component {
 let FocusContext = createNamedContext("Focus");
 
 let FocusHandler = ({ uri, location, component, ...domProps }) => {
-  const test = document.getElementById("test");
-  test.innerHTML += "--@ FocusHandler 不是 div ";
   return (
     <FocusContext.Consumer>
       {requestFocus => (
@@ -319,8 +322,6 @@ class FocusHandlerImpl extends React.Component {
   }
 
   componentDidMount() {
-    const test = document.getElementById("test");
-    test.innerHTML += "FocusHandlerImpl componentDidMount";
     focusHandlerCount++;
     this.focus();
   }
@@ -366,8 +367,6 @@ class FocusHandlerImpl extends React.Component {
   };
 
   render() {
-    const test = document.getElementById("test");
-    test.innerHTML += "FocusHandlerImpl render";
     let {
       children,
       style,
