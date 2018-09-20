@@ -32,8 +32,11 @@ let pick = (routes, uri) => {
   let default_;
 
   let [uriPathname] = uri.split("?");
+  // 把 ppathname.split('/')
   let uriSegments = segmentize(uriPathname);
+  // 是不是根路径
   let isRootUri = uriSegments[0] === "";
+  // 把所有路由转数组按路径长度排序   'mp/homepage/home'.split('/')  length=3
   let ranked = rankRoutes(routes);
 
   for (let i = 0, l = ranked.length; i < l; i++) {
@@ -49,8 +52,10 @@ let pick = (routes, uri) => {
       continue;
     }
 
+    // 转每个路由的路径为数组   'mp/homepage/home'.split('/')
     let routeSegments = segmentize(route.path);
     let params = {};
+    // 单纯取最大值满足双循环  routeSegments uriSegments 就都能循环完成
     let max = Math.max(uriSegments.length, routeSegments.length);
     let index = 0;
 
@@ -59,10 +64,14 @@ let pick = (routes, uri) => {
       let uriSegment = uriSegments[index];
 
       let isSplat = routeSegment === "*";
+
+      // 'mp/homepage/v2/*/home'  ==>  home
+      // '*/mp/homepage/v2/home'  ==>  mp/homepage/v2/home
       if (isSplat) {
         // Hit a splat, just grab the rest, and return a match
-        // uri:   /files/documents/work
-        // route: /files/*
+
+        // 结果 uri:   /files/documents/work
+        // 结果 route: /files/*
         params["*"] = uriSegments
           .slice(index)
           .map(decodeURIComponent)
@@ -70,6 +79,7 @@ let pick = (routes, uri) => {
         break;
       }
 
+      // 走这里的情况 uriSegments = /m/users/5b9b27b83255e0002240abef/homepage/v2/product    routeSegments=/m/users/:userId/homepage/v2/product/productId
       if (uriSegment === undefined) {
         // URI is shorter than the route, no match
         // uri:   /users
@@ -78,9 +88,12 @@ let pick = (routes, uri) => {
         break;
       }
 
+      // 动态参数是否匹配 :userId
+      // var paramRe = /^:(.+)/;
       let dynamicMatch = paramRe.exec(routeSegment);
 
       if (dynamicMatch && !isRootUri) {
+        // reservedNames = ["uri", "path"];
         let matchIsNotReserved = reservedNames.indexOf(dynamicMatch[1]) === -1;
         invariant(
           matchIsNotReserved,
