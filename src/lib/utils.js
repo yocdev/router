@@ -28,6 +28,8 @@ let startsWith = (string, search) => {
 //
 // I know, I should use TypeScript not comments for these types.
 let pick = (routes, uri) => {
+  const test = document.getElementById("test");
+  test.innerHTML += "__进入 pick 内部__";
   let match;
   let default_;
 
@@ -37,8 +39,8 @@ let pick = (routes, uri) => {
   // 是不是根路径
   let isRootUri = uriSegments[0] === "";
   // 把所有路由转数组按路径长度排序   'mp/homepage/home'.split('/')  length=3
+  test.innerHTML += "__进入 rankRoutes __";
   let ranked = rankRoutes(routes);
-  const test = document.getElementById("test");
 
   test.innerHTML += "__进入大循环__";
   for (let i = 0, l = ranked.length; i < l; i++) {
