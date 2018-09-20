@@ -29,12 +29,13 @@ let startsWith = (string, search) => {
 // I know, I should use TypeScript not comments for these types.
 let pick = (routes, uri) => {
   const test = document.getElementById("test");
+  test.innerHTML += `__${uri} __`;
   let match = null;
   let default_ = null;
   test.innerHTML += "__进入 pick 内部__";
 
-  let [uriPathname] = uri.split("?");
-  test.innerHTML += `__进入${uriPathname} __`;
+  let uriPathname = uri.split("?")[0];
+  test.innerHTML += `__${uriPathname} __`;
   // 把 ppathname.split('/')
   let uriSegments = segmentize(uriPathname);
   test.innerHTML += `__进入${JSON.stringify(uriSegments)} __`;
