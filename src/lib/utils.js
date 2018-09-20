@@ -29,8 +29,8 @@ let startsWith = (string, search) => {
 // I know, I should use TypeScript not comments for these types.
 let pick = (routes, uri) => {
   const test = document.getElementById("test");
-  let match;
-  let default_;
+  let match = null;
+  let default_ = null;
   test.innerHTML += "__进入 pick 内部__";
 
   let [uriPathname] = uri.split("?");
