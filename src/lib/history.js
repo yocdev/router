@@ -113,6 +113,8 @@ let canUseDOM = !!(
   window.document.createElement
 );
 let getSource = () => {
+  const test = document.getElementById("test");
+  test.innerHTML += `window__${canUseDOM}`;
   return canUseDOM ? window : createMemorySource();
 };
 

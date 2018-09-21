@@ -132,6 +132,8 @@ class LocationProvider extends React.Component {
       state: { context },
       props: { children }
     } = this;
+    const test = document.getElementById("test");
+    test.innerHTML += `Location_render__${JSON.stringify(context.location)}`;
     return (
       <LocationContext.Provider value={context}>
         {typeof children === "function" ? children(context) : children || null}
@@ -190,7 +192,7 @@ class RouterImpl extends React.Component {
 
   render() {
     const test = document.getElementById("test");
-    test.innerHTML += " 进入 render";
+    test.innerHTML += ` 进入 render${JSON.stringify(this.props.location)}`;
 
     let {
       location,
@@ -242,7 +244,6 @@ class RouterImpl extends React.Component {
           undefined
         )
       );
-      test.innerHTML += " 进入 clone";
 
       // using 'div' for < 16.3 support
       let FocusWrapper = primary ? FocusHandler : component;
@@ -251,7 +252,6 @@ class RouterImpl extends React.Component {
       let wrapperProps = primary
         ? { uri, location, component, ...domProps }
         : domProps;
-      test.innerHTML += " 进入 match";
 
       return (
         <BaseContext.Provider value={{ baseuri: uri, basepath }}>

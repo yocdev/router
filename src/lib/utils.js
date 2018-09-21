@@ -35,16 +35,13 @@ let pick = (routes, uri) => {
   test.innerHTML += "__进入 pick 内部__";
 
   let uriPathname = uri.split("?")[0];
-  test.innerHTML += `__${uriPathname} __`;
   // 把 ppathname.split('/')
   let uriSegments = segmentize(uriPathname);
-  test.innerHTML += `__进入${JSON.stringify(uriSegments)} __`;
   // 是不是根路径
   let isRootUri = uriSegments[0] === "";
   // 把所有路由转数组按路径长度排序   'mp/homepage/home'.split('/')  length=3
   let ranked = rankRoutes(routes);
 
-  test.innerHTML += "__进入大循环__";
   for (let i = 0, l = ranked.length; i < l; i++) {
     let missed = false;
     let route = ranked[i].route;
@@ -65,7 +62,6 @@ let pick = (routes, uri) => {
     let max = Math.max(uriSegments.length, routeSegments.length);
     let index = 0;
 
-    test.innerHTML += "__进入小循环__";
     for (; index < max; index++) {
       let routeSegment = routeSegments[index];
       let uriSegment = uriSegments[index];
@@ -120,7 +116,6 @@ let pick = (routes, uri) => {
         break;
       }
     }
-    test.innerHTML += "__退出小循环__";
 
     if (!missed) {
       match = {
@@ -131,7 +126,6 @@ let pick = (routes, uri) => {
       break;
     }
   }
-  test.innerHTML += "__退出大循环__";
 
   return match || default_ || null;
 };
