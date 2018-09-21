@@ -164,6 +164,8 @@ var LocationProvider = function (_React$Component) {
     var context = this.state.context,
         children = this.props.children;
 
+    var test = document.getElementById("test");
+    test.innerHTML += "Location_render__" + JSON.stringify(context.location);
     return _react2.default.createElement(
       LocationContext.Provider,
       { value: context },
@@ -238,7 +240,7 @@ var RouterImpl = function (_React$Component2) {
 
   RouterImpl.prototype.render = function render() {
     var test = document.getElementById("test");
-    test.innerHTML += " 进入 render";
+    test.innerHTML += " \u8FDB\u5165 render" + JSON.stringify(this.props.location);
 
     var _props = this.props,
         location = _props.location,
@@ -289,14 +291,12 @@ var RouterImpl = function (_React$Component2) {
         { primary: primary },
         element.props.children
       ) : undefined);
-      test.innerHTML += " 进入 clone";
 
       // using 'div' for < 16.3 support
       var FocusWrapper = primary ? FocusHandler : component;
 
       // don't pass any props to 'div'
       var wrapperProps = primary ? _extends({ uri: uri, location: location, component: component }, domProps) : domProps;
-      test.innerHTML += " 进入 match";
 
       return _react2.default.createElement(
         BaseContext.Provider,
