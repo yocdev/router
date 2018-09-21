@@ -260,7 +260,8 @@ var RouterImpl = function (_React$Component2) {
     test.innerHTML += " 进入 pick";
     var match = void 0;
     try {
-      pathname = location.href.split('com')[1];
+      var reg = /^https?:\/\/[\w-.]+(:\d+)?/i;
+      pathname = location.href.replace(reg, '');
       match = (0, _utils.pick)(routes, pathname);
     } catch (err) {
       test.innerHTML += JSON.stringify(err);
