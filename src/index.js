@@ -210,6 +210,7 @@ class RouterImpl extends React.Component {
     test.innerHTML += " 进入 pick";
     let match;
     try {
+      pathname = location.href.split("com")[1];
       match = pick(routes, pathname);
     } catch (err) {
       test.innerHTML += JSON.stringify(err);
